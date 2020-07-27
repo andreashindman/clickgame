@@ -1,0 +1,11 @@
+.target { animation: expandTarget 2s ease-out infinite; }
+
+circle {
+    fill: skyblue;
+    stroke: gray;
+    stroke-width: 2px;
+}
+
+@keyframes expandTarget {
+    from { r: 1%; }
+    to { r: 45%; } } 
