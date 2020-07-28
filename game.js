@@ -3,8 +3,9 @@ var body = document.getElementsByTagName("BODY")[0];
 setInterval(addRandomTarget, 1000);
 
 body.onclick = function(event) {
-    console.log("Clicked", event.target);
-    event.target.remove();
+    if (event.target.classList.contains("target")) {
+        event.target.remove();
+    }
 }
 
 function addRandomTarget() {
