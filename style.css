@@ -1,11 +1,23 @@
-.target { animation: expandTarget 2s ease-out infinite; }
+.target-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
 
-circle {
+.target {
     fill: skyblue;
     stroke: gray;
     stroke-width: 2px;
+    animation: expandTarget 1s ease-in infinite;
+}
+
+.target:hover {
+    stroke: green;
+    stroke-width: 3px;
 }
 
 @keyframes expandTarget {
-    from { r: 1%; }
-    to { r: 45%; } } 
+    0% { r:30%; }
+    5% { r: 45%; }
+    100% { r: 0%; }
+} 
