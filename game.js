@@ -1,8 +1,7 @@
 var body = document.getElementsByTagName("BODY")[0];
 
-setInterval(addRandomTarget, 500);
-
 body.onclick = function(event) {
+    console.log("Clicked", event.target);
     if (event.target.classList.contains("target")) {
         event.target.parentElement.remove();
     }
@@ -19,5 +18,12 @@ function getRndDouble(min, max) {
 }
 
 var btn = document.createElement("BUTTON");
-btn.innerHTML = "CLICK ME";
+
+btn.innerHTML = "Start!";
 document.body.appendChild(btn);
+
+btn.addEventListener("click", startGame);
+
+function startGame() {
+    setInterval(addRandomTarget, 2000);
+}
