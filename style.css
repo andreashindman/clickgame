@@ -8,7 +8,7 @@
     fill: skyblue;
     stroke: gray;
     stroke-width: 2px;
-    animation: expandTarget 1s ease-in infinite;
+    /* animation: expandTarget 1s ease-in infinite; */
 }
 
 .target:hover {

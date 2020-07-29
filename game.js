@@ -1,10 +1,10 @@
 var body = document.getElementsByTagName("BODY")[0];
 
-setInterval(addRandomTarget, 1000);
+setInterval(addRandomTarget, 500);
 
 body.onclick = function(event) {
     if (event.target.classList.contains("target")) {
-        event.target.remove();
+        event.target.parentElement.remove();
     }
 }
 
@@ -18,6 +18,6 @@ function getRndDouble(min, max) {
     return (Math.random() * (max - min)) + min
 }
 
-// var btn = document.createElement("BUTTON");
-// btn.innerHTML = "CLICK ME";
-// document.body.appendChild(btn);
+var btn = document.createElement("BUTTON");
+btn.innerHTML = "CLICK ME";
+document.body.appendChild(btn);
