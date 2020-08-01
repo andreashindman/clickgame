@@ -12,34 +12,37 @@
 // // stopBtn.addEventListener("click", stopGame);
 // stopBtn.onclick = stopGame;
 
-// interval ID in global scope for access by other functions
-var targetGenerator;
-
-// start interval for adding targets to page if interval ID
-// is null or undefined
-function startGame() {
-    console.log("game started");
-    // ensure targetGenerator is not running: check for undefined or null
-    if (!targetGenerator)
-        targetGenerator = setInterval(addRandomTarget, 2000);
-}
-
-// stop game and set interval ID, targetGenerator, to null
-function stopGame() {
-    console.log("game stopped");
-    clearInterval(targetGenerator)
-    targetGenerator = null;
-}
+// interval IDs in global scope for access by other functions
+var targetInterval, timerInterval;
 
 // var body = document.getElementsByTagName("BODY")[0];
 var body = document.body;
 
-// remove targets when they're clicked
+// handle targets when they're clicked
 body.onclick = function(event) {
     // console.log("Clicked: ", event.target);
     if (event.target.classList.contains("target")) {
         event.target.parentElement.remove();
     }
+}
+
+// start interval for adding targets to page if interval ID
+// is null or undefined
+function startGame() {
+    // ensure targetInterval is not running: check for undefined or null
+    if (!targetInterval) {
+        targetInterval = setInterval(addRandomTarget, 2000);
+        startTimer();
+    }
+}
+
+// stop game and set interval ID, targetInterval, to null
+function stopGame() {
+    clearInterval(targetInterval)
+    targetInterval = null;
+
+    // stop timer
+    clearInterval(timerInterval);
 }
 
 // add a random target somewhere on the page
@@ -54,4 +57,13 @@ function getRndDouble(min, max) {
     return (Math.random() * (max - min)) + min
 }
 
-
+function startTimer() {
+    var seconds = 0;
+    var minutes = 0;
+    document.getElementById("timer").innerHTML = minutes + "m" + " " + seconds + "s";
+    clearInterval(timerInterval);
+    timerInterval = setInterval(function timer() {
+        seconds++;
+        document.getElementById("timer").innerHTML = minutes + "m" + " " + seconds + "s";
+    }, 1000)
+}

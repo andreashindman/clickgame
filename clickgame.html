@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>Click Game</title>
     <meta charset="utf-8">
@@ -8,8 +7,11 @@
   </head>
 
   <body>
-    <button onclick="startGame()">start</button>
-    <button onclick="stopGame()">stop</button>
+    <div id="controls">
+      <button onclick="startGame()">start</button>
+      <button onclick="stopGame()">stop</button>
+      <p id="timer"></p>
+    </div>
     <script src="./game.js"></script>
   </body>
 

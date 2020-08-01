@@ -1,3 +1,8 @@
+#controls {
+    margin: auto;
+    text-align: center;
+}
+
 .target-container {
     position: absolute;
 }
