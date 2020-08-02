@@ -18,11 +18,21 @@ var targetInterval, timerInterval;
 // var body = document.getElementsByTagName("BODY")[0];
 var body = document.body;
 
+// keep count of strikes 
+var strikes = 0;
+
 // handle targets when they're clicked
 body.onclick = function(event) {
-    // console.log("Clicked: ", event.target);
     if (event.target.classList.contains("target")) {
+        // remove target 
         event.target.parentElement.remove();
+        console.log(strikes);
+    } else if (event.target.classList.contains("obstacle")) {
+        // remove obstacle
+        event.target.parentElement.remove();
+        // increment strikes 
+        ++strikes;
+        console.log(strikes);
     }
 }
 
@@ -49,7 +59,17 @@ function stopGame() {
 function addRandomTarget() {
     var posFromLeft = (getRndDouble(0, innerWidth - 100));
     var posFromTop = (getRndDouble(0, innerHeight - 100));
-    body.innerHTML += `<svg class="target-container" width="100" height="100" style="left: ${posFromLeft}px; top: ${posFromTop}px;"> <circle class="target" cx="50" cy="50" r="40"/> </svg>`
+    var targetType;
+    
+    // determine whether a target or an obstacle will be placed 
+    if (getRndDouble(0, 1) > 0.2) {
+        targetType = "target";
+    } else {
+        targetType = "obstacle";
+    }
+
+    // add target or obstacle to page
+    body.innerHTML += `<svg class="target-container" width="100" height="100" style="left: ${posFromLeft}px; top: ${posFromTop}px;"> <circle class=${targetType} cx="50" cy="50" r="40"/> </svg>`
 }
 
 // get random double within range [min, max]
@@ -57,13 +77,30 @@ function getRndDouble(min, max) {
     return (Math.random() * (max - min)) + min
 }
 
+// start (or restart) and display the game timer
 function startTimer() {
-    var seconds = 0;
-    var minutes = 0;
-    document.getElementById("timer").innerHTML = minutes + "m" + " " + seconds + "s";
+    
+    var secondsElapsed = 0;
+    document.getElementById("timer").innerHTML = "00:00";
+
+    // clear existing timer ID
     clearInterval(timerInterval);
-    timerInterval = setInterval(function timer() {
-        seconds++;
-        document.getElementById("timer").innerHTML = minutes + "m" + " " + seconds + "s";
-    }, 1000)
+    timerInterval = setInterval(setTime, 1000);
+
+    function setTime() {
+        ++secondsElapsed;
+        var seconds = pad(secondsElapsed % 60);
+        var minutes = pad(parseInt(secondsElapsed / 60));
+        document.getElementById("timer").innerHTML = minutes + ":" + seconds;
+    }
+
+    // return a value with leading 0's if length < 2
+    function pad(val) {
+        var valString = val + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        } else {
+            return valString;
+        }
+    }
 }

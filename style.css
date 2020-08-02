@@ -1,6 +1,11 @@
 #controls {
-    margin: auto;
+    margin-top: 30px;
     text-align: center;
+    font-size: 2em;
+}
+
+button {
+    font-size: 1.5rem;
 }
 
 .target-container {
@@ -15,8 +20,19 @@
     /* animation-fill-mode: forwards; */
 }
 
+.obstacle {
+    fill: red;
+    stroke: gray;
+    stroke-width: 2px;
+}
+
 .target:hover {
     stroke: green;
+    stroke-width: 3px;
+}
+
+.obstacle:hover {
+    stroke: black;
     stroke-width: 3px;
 }
 
