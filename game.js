@@ -20,22 +20,29 @@ var body = document.body;
 
 // keep count of strikes 
 var strikes = 0;
+var score = 0;
 
 // handle targets when they're clicked
 body.onclick = function(event) {
-    if (event.target.classList.contains("target")) {
-        // remove target 
-        event.target.parentElement.remove();
-    } else if (event.target.classList.contains("obstacle") && strikes < 3) {
-        // remove obstacle
-        event.target.parentElement.remove();
-        // increment strikes 
-        ++strikes;
-        document.getElementById("strikes").innerHTML += `<p id="strike-marker">&#10060</p>`;
-        console.log(strikes);
-        if (strikes >= 3) {
-            stopGame();
-            document.getElementById("gameover").innerHTML = "Game Over";
+    if (strikes < 3) {
+        if (event.target.classList.contains("target")) {
+            // remove target 
+            event.target.parentElement.remove();
+            //update score
+            ++score;
+            document.getElementById("score").innerHTML = `<p>score: ${score}</p>`;
+            
+        } else if (event.target.classList.contains("obstacle")) {
+            // remove obstacle
+            event.target.parentElement.remove();
+            // increment strikes 
+            ++strikes;
+            document.getElementById("strikes").innerHTML += `<p id="strike-marker">&#10060</p>`;
+            console.log(strikes);
+            if (strikes >= 3) {
+                stopGame();
+                document.getElementById("gameover").innerHTML = "Game Over";
+            }
         }
     }
 }
@@ -45,6 +52,10 @@ body.onclick = function(event) {
 function startGame() {
     // ensure targetInterval is not running: check for undefined or null
     if (!targetInterval) {
+        // remove existing targets and obstacles 
+        $(".target").remove();
+        $(".obstacle").remove();
+
         targetInterval = setInterval(addRandomTarget, 700);
         startTimer();
     }
@@ -59,7 +70,6 @@ function startGame() {
 function stopGame() {
     clearInterval(targetInterval)
     targetInterval = null;
-
     // stop timer
     clearInterval(timerInterval);
 }
