@@ -62,7 +62,9 @@ function startGame() {
 
     // reset game state 
     strikes = 0;
+    score = 0;
     document.getElementById("strikes").innerHTML = "";
+    document.getElementById("score").innerHTML = "";
     document.getElementById("gameover").innerHTML = "";
 }
 
