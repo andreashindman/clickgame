@@ -26,13 +26,17 @@ body.onclick = function(event) {
     if (event.target.classList.contains("target")) {
         // remove target 
         event.target.parentElement.remove();
-        console.log(strikes);
     } else if (event.target.classList.contains("obstacle")) {
         // remove obstacle
         event.target.parentElement.remove();
         // increment strikes 
         ++strikes;
+        document.getElementById("strikes").innerHTML += `<p id="strike-marker">&#10060</p>`;
         console.log(strikes);
+        if (strikes >= 3) {
+            stopGame();
+            document.getElementById("gameover").innerHTML = "Game Over";
+        }
     }
 }
 
@@ -44,6 +48,11 @@ function startGame() {
         targetInterval = setInterval(addRandomTarget, 2000);
         startTimer();
     }
+
+    // reset game state 
+    strikes = 0;
+    document.getElementById("strikes").innerHTML = "";
+    document.getElementById("gameover").innerHTML = "";
 }
 
 // stop game and set interval ID, targetInterval, to null
@@ -62,7 +71,7 @@ function addRandomTarget() {
     var targetType;
     
     // determine whether a target or an obstacle will be placed 
-    if (getRndDouble(0, 1) > 0.2) {
+    if (getRndDouble(0, 1) > 0.999999999) {
         targetType = "target";
     } else {
         targetType = "obstacle";
@@ -74,7 +83,7 @@ function addRandomTarget() {
 
 // get random double within range [min, max]
 function getRndDouble(min, max) {
-    return (Math.random() * (max - min)) + min
+    return (Math.random() * (max - min)) + min; 
 }
 
 // start (or restart) and display the game timer

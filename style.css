@@ -8,6 +8,16 @@ button {
     font-size: 1.5rem;
 }
 
+#strikes {
+    display: flex;
+    max-width: 100px;
+    margin: auto;
+}
+
+#strike-marker {
+    margin: 5px;
+}
+
 .target-container {
     position: absolute;
 }
