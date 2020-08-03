@@ -26,7 +26,7 @@ body.onclick = function(event) {
     if (event.target.classList.contains("target")) {
         // remove target 
         event.target.parentElement.remove();
-    } else if (event.target.classList.contains("obstacle")) {
+    } else if (event.target.classList.contains("obstacle") && strikes < 3) {
         // remove obstacle
         event.target.parentElement.remove();
         // increment strikes 
@@ -45,7 +45,7 @@ body.onclick = function(event) {
 function startGame() {
     // ensure targetInterval is not running: check for undefined or null
     if (!targetInterval) {
-        targetInterval = setInterval(addRandomTarget, 2000);
+        targetInterval = setInterval(addRandomTarget, 700);
         startTimer();
     }
 
@@ -71,7 +71,7 @@ function addRandomTarget() {
     var targetType;
     
     // determine whether a target or an obstacle will be placed 
-    if (getRndDouble(0, 1) > 0.999999999) {
+    if (getRndDouble(0, 1) > 0.3) {
         targetType = "target";
     } else {
         targetType = "obstacle";
