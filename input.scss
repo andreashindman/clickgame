@@ -26,6 +26,7 @@ button {
   fill: skyblue;
   stroke: gray;
   stroke-width: 2px;
+
   /* animation: expandTarget 1s ease-in; */
   /* animation-fill-mode: forwards; */
 }
@@ -50,9 +51,8 @@ button {
   0% {
     r: 0%;
   }
+
   100% {
     r: 45%;
   }
 }
-
-/*# sourceMappingURL=style.css.map */
